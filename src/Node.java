@@ -8,8 +8,12 @@ public class Node {
         this.data=data;
         this.next=next;
     }
-
-    static void insert(int x,Node start){
+    //Insert Element Function
+    static Node insert(int x,Node start){
+        if(start==null || start.data > x){
+            start=new Node(x,start);
+            return start;
+        }
         Node p=start;
         while(p.next!=null){
             if(p.next.data>x)
@@ -17,6 +21,7 @@ public class Node {
             p=p.next;
         }
         p.next=new Node(x,p.next);
+        return start;
     }
     static int add(Node start){
         int sum=0;
@@ -25,6 +30,7 @@ public class Node {
         }
         return sum;
     }
+    //Filter Out even and odd elements
     static void evenOddFilter(Node start){
         System.out.println("Even");
         for (Node q=start;q!=null;q=q.next){
@@ -40,6 +46,7 @@ public class Node {
         }
         
     }
+    //Even Positon element Function
     static void evenPosition(Node start){
         int position=1;
         for (Node q=start;q!=null;q=q.next){
@@ -49,6 +56,7 @@ public class Node {
             position++;
         }
     }
+    //Odd Positon element Function
     static void oddPosition(Node start){
         int position=1;
         for (Node q=start;q!=null;q=q.next){
@@ -58,6 +66,7 @@ public class Node {
             position++;
         }
     }  
+    //Delete Function
     static Node delete(Node start ,int x){
         if(start==null || start.data>x)
             return start;
@@ -73,26 +82,35 @@ public class Node {
         }
         return start;
     } 
+    //Merge Function
     static Node merge(Node list1,Node list2){
-        Node dummy=new Node(0);
-        Node adder=dummy;
-        while(list1!=null && list2!=null){
-            if(list1.data<=list2.data){
-                adder.next=list1;
-                list1=list1.next;
-            }else{
-                adder.next=list2;
-                list2=list2.next;
-            }
-            adder=adder.next;
+        // Node dummy=new Node(0);
+        // Node adder=dummy;
+        // while(list1!=null && list2!=null){
+        //     if(list1.data<=list2.data){
+        //         adder.next=list1;
+        //         list1=list1.next;
+        //     }else{
+        //         adder.next=list2;
+        //         list2=list2.next;
+        //     }
+        //     adder=adder.next;
+        // }
+        // if(list1!=null){
+        //     adder.next=list1;
+        // }else{
+        //     adder.next=list2;
+        // }
+        // return dummy.next;
+        for(Node q=list2;q!=null;q=q.next){
+            list1=insert(q.data, list1);
         }
-        if(list1!=null){
-            adder.next=list1;
-        }else{
-            adder.next=list2;
-        }
-        return dummy.next;
-    }                                                                                          
+        return list1;
+    }  
+    //Copy
+    //Divide List into n parts
+    //sublist
+    //randomize the list                                                                                        
     public static void main(String[]args){
 
 //        Node start=new Node(11);
@@ -158,16 +176,19 @@ public class Node {
         System.out.println("Sum of List = "+sum);
        // evenOddFilter(start);
         evenPosition(start);
+        //Delete
         delete(start, 10);
         System.out.println("After Deleting :");
         for(Node q=start;q!=null;q=q.next){
             System.out.println(q.data);
             counter++;
         }
-        Node mergNode=merge(start, newNode);
+        //Merge
+        Node mergNode=merge(newNode, start);
         System.out.println("Merged : ");
         for(Node q=mergNode;q!=null;q=q.next){
             System.out.println(q.data);
+            counter++;
         }
 
     }
