@@ -108,7 +108,18 @@ public class Node {
         return list1;
     }  
     //Copy
-    //Divide List into n parts
+    public static Node copy(Node p){
+        Node q=new Node(p.data);
+        Node temp=q;
+        p=p.next;
+        while (p!=null) {
+            temp.next=new Node(p.data);
+            temp=temp.next;
+            p=p.next;
+        }
+        return q;
+    }
+     //Divide List into n parts
     //sublist
     //randomize the list                                                                                        
     public static void main(String[]args){
