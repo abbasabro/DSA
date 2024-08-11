@@ -121,6 +121,27 @@ public class Node {
     }
      //Divide List into n parts
     //sublist
+    public static Node sublist(int intialPos,int finalPos,Node start){
+		int i=intialPos;
+        int counter=0;
+		Node p=start;
+		while(p!=null){
+			if(counter==i)
+				break;
+			counter++;
+			p=p.next;
+		}
+		Node q=new Node(p.data);
+		Node temp=q;
+		p=p.next;
+		while(p!=null && i<finalPos){
+			temp.next=new Node(p.data);
+			temp=temp.next;
+			p=p.next;
+            i++;
+		}
+		return q;
+	}
     //randomize the list                                                                                        
     public static void main(String[]args){
 
@@ -194,13 +215,21 @@ public class Node {
             System.out.println(q.data);
             counter++;
         }
-        //Merge
+      //  Merge
         Node mergNode=merge(newNode, start);
         System.out.println("Merged : ");
         for(Node q=mergNode;q!=null;q=q.next){
             System.out.println(q.data);
             counter++;
         }
+        //Sublist
+        Node subList=sublist(2, 6, start);
+        System.out.println("Sublist : ");
+        for(Node q=subList;q!=null;q=q.next){
+            System.out.println(q.data);
+        }
 
+
+       
     }
 }
